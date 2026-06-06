@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LPH - Liga Profesional Haxball</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary:#00b7ff;
+--secondary:#12005d;
+--background:#0a0038;
+--card:#13005f;
+--text:#ffffff;
+--shadow:0 0 20px rgba(0,183,255,.3);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:
+linear-gradient(
+135deg,
+#060025,
+#10005a,
+#150072
+);
+color:white;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+.sidebar{
+position:fixed;
+left:-300px;
+top:0;
+width:300px;
+height:100%;
+background:#07002f;
+transition:.3s;
+z-index:999;
+padding:20px;
+box-shadow:var(--shadow);
+}
+
+.sidebar.active{
+left:0;
+}
+
+.sidebar h2{
+margin-bottom:20px;
+color:var(--primary);
+}
+
+.sidebar button{
+width:100%;
+padding:12px;
+margin-bottom:10px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+}
+
+.menu-btn{
+position:fixed;
+top:20px;
+left:20px;
+font-size:30px;
+cursor:pointer;
+z-index:1000;
+}
+
+header{
+padding:40px;
+text-align:center;
+}
+
+.logo{
+width:150px;
+max-width:80%;
+margin-bottom:20px;
+}
+
+.hero{
+text-align:center;
+padding:40px 20px;
+}
+
+.hero h1{
+font-size:60px;
+font-weight:800;
+}
+
+.hero p{
+font-size:20px;
+opacity:.9;
+margin-top:10px;
+}
+
+.hero-buttons{
+margin-top:25px;
+}
+
+.btn{
+background:var(--primary);
+color:white;
+padding:15px 30px;
+border-radius:12px;
+text-decoration:none;
+font-weight:700;
+margin:10px;
+display:inline-block;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+.section{
+padding:50px 30px;
+}
+
+.section h2{
+font-size:32px;
+margin-bottom:25px;
+color:var(--primary);
+text-align:center;
+}
+
+.card-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,.1);
+border-radius:20px;
+padding:25px;
+transition:.3s;
+box-shadow:var(--shadow);
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.mvp-card{
+text-align:center;
+}
+
+.mvp-card h3{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.mvp-avatar{
+width:120px;
+height:120px;
+border-radius:50%;
+background:#1f1f1f;
+margin:15px auto;
+border:4px solid var(--primary);
+}
+
+.mvp-stats{
+margin-top:15px;
+line-height:2;
+}
+
+.match-card{
+text-align:center;
+}
+
+.match-card h3{
+font-size:28px;
+margin-bottom:10px;
+}
+
+.vs{
+font-size:40px;
+font-weight:800;
+color:var(--primary);
+margin:20px 0;
+}
+
+.live-section{
+text-align:center;
+}
+
+.live-box{
+max-width:800px;
+margin:auto;
+padding:40px;
+border-radius:25px;
+background:linear-gradient(
+135deg,
+rgba(0,183,255,.2),
+rgba(0,0,0,.3)
+);
+box-shadow:var(--shadow);
+}
+
+.live-box h2{
+font-size:40px;
+margin-bottom:15px;
+}
+
+.live-box p{
+font-size:20px;
+margin-bottom:25px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+background:rgba(255,255,255,.05);
+border-radius:15px;
+overflow:hidden;
+}
+
+th{
+background:var(--primary);
+padding:15px;
+}
+
+td{
+padding:12px;
+text-align:center;
+border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+tr:hover{
+background:rgba(255,255,255,.05);
+}
+
+.news-card{
+cursor:pointer;
+}
+
+.news-card h3{
+margin-bottom:10px;
+}
+
+.news-card p{
+opacity:.8;
+}
+
+footer{
+margin-top:50px;
+padding:30px;
+text-align:center;
+background:rgba(0,0,0,.3);
+}
+
+.settings-group{
+margin-bottom:20px;
+}
+
+.settings-group label{
+display:block;
+margin-bottom:10px;
+font-weight:600;
+}
+
+.settings-group input{
+width:100%;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:40px;
+}
+
+.live-box h2{
+font-size:28px;
+}
+
+table{
+font-size:12px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="menu-btn" onclick="toggleMenu()">
+☰
+</div>
+
+<div class="sidebar" id="sidebar">
+
+<h2>Ajustes LPH</h2>
+
+<div class="settings-group">
+<label>Brillo</label>
+<input type="range"
+min="50"
+max="150"
+value="100"
+id="brightness">
+</div>
+
+<div class="settings-group">
+<label>Tamaño Texto</label>
+<input type="range"
+min="80"
+max="140"
+value="100"
+id="fontsize">
+</div>
+
+<button onclick="setDarkTheme()">
+Modo Azul Oscuro
+</button>
+
+<button onclick="setLightTheme()">
+Modo Claro
+</button>
+
+<button onclick="setInvertTheme()">
+Modo Invertido
+</button>
+
+<button onclick="resetTheme()">
+Restablecer
+</button>
+
+<hr style="margin:20px 0;">
+
+<button onclick="window.location.href='#inicio'">
+Inicio
+</button>
+
+<button onclick="window.location.href='#tabla'">
+Tabla de Posiciones
+</button>
+
+<button onclick="window.location.href='#mvp'">
+MVP de la Fecha
+</button>
+
+<button onclick="window.location.href='#partido'">
+Partido de la Fecha
+</button>
+
+<button onclick="window.location.href='#noticias'">
+Noticias
+</button>
+
+<button onclick="window.location.href='#vivo'">
+¡Viví el Partido!
+</button>
+
+</div>
+
+<header id="inicio">
+
+<img
+src="logo.png"
+class="logo"
+alt="LPH Logo"
+>
+
+<div class="hero">
+
+<h1>
+LIGA PROFESIONAL HAXBALL
+</h1>
+
+<p>
+La máxima competición de Haxball
+</p>
+
+<div class="hero-buttons">
+
+<a href="#tabla" class="btn">
+Ver Tabla
+</a>
+
+<a href="#partido" class="btn">
+Partido de la Fecha
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+<section class="section" id="mvp">
+
+<h2>
+🏆 MVP DE LA FECHA
+</h2>
+
+<div class="card-grid">
+
+<div class="card mvp-card">
+
+<div class="mvp-avatar"></div>
+
+<h3>
+Jugador MVP
+</h3>
+
+<div class="mvp-stats">
+
+<p>⚽ Goles: 4</p>
+
+<p>🎯 Asistencias: 2</p>
+
+<p>⭐ Calificación: 9.8</p>
+
+<p>🏟 Equipo: LPH FC</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="partido">
+
+<h2>
+🔥 PARTIDO DE LA FECHA
+</h2>
+
+<div class="card-grid">
+
+<div class="card match-card">
+
+<h3>
+Equipo A
+</h3>
+
+<div class="vs">
+VS
+</div>
+
+<h3>
+Equipo B
+</h3>
+
+<p style="margin-top:20px;">
+📅 Viernes 22:00
+</p>
+
+<p>
+🏆 Fecha 12
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="vivo">
+
+<div class="live-box">
+
+<h2>
+🎥 ¡VIVÍ EL PARTIDO!
+</h2>
+
+<p>
+Seguí la transmisión oficial
+de ESPN Haxball en Kick.
+</p>
+
+<a
+href="https://kick.com/espnhaxball"
+target="_blank"
+class="btn"
+>
+VER EN KICK
+</a>
+
+</div>
+
+</section>
+
+<section class="section" id="tabla">
+
+<h2>
+📊 TABLA DE POSICIONES
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>POS</th>
+<th>EQUIPO</th>
+<th>PJ</th>
+<th>PG</th>
+<th>PE</th>
+<th>PP</th>
+<th>GF</th>
+<th>GC</th>
+<th>DG</th>
+<th>PTS</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td>1</td>
+<td>Equipo 1</td>
+<td>10</td>
+<td>8</td>
+<td>1</td>
+<td>1</td>
+<td>25</td>
+<td>8</td>
+<td>17</td>
+<td>25</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>Equipo 2</td>
+<td>10</td>
+<td>7</td>
+<td>2</td>
+<td>1</td>
+<td>22</td>
+<td>10</td>
+<td>12</td>
+<td>23</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>Equipo 3</td>
+<td>10</td>
+<td>6</td>
+<td>2</td>
+<td>2</td>
+<td>18</td>
+<td>9</td>
+<td>9</td>
+<td>20</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>Equipo 4</td>
+<td>10</td>
+<td>6</td>
+<td>1</td>
+<td>3</td>
+<td>17</td>
+<td>11</td>
+<td>6</td>
+<td>19</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>Equipo 5</td>
+<td>10</td>
+<td>5</td>
+<td>3</td>
+<td>2</td>
+<td>15</td>
+<td>12</td>
+<td>3</td>
+<td>18</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>Equipo 6</td>
+<td>10</td>
+<td>5</td>
+<td>2</td>
+<td>3</td>
+<td>14</td>
+<td>12</td>
+<td>2</td>
+<td>17</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>Equipo 7</td>
+<td>10</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>13</td>
+<td>13</td>
+<td>0</td>
+<td>15</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>Equipo 8</td>
+<td>10</td>
+<td>4</td>
+<td>2</td>
+<td>4</td>
+<td>12</td>
+<td>14</td>
+<td>-2</td>
+<td>14</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>Equipo 9</td>
+<td>10</td>
+<td>4</td>
+<td>1</td>
+<td>5</td>
+<td>11</td>
+<td>15</td>
+<td>-4</td>
+<td>13</td>
+</tr>
+
+<tr>
+<td>10</td>
+<td>Equipo 10</td>
+<td>10</td>
+<td>3</td>
+<td>3</td>
+<td>4</td>
+<td>10</td>
+<td>15</td>
+<td>-5</td>
+<td>12</td>
+</tr>
+
+<tr>
+<td>11</td>
+<td>Equipo 11</td>
+<td>10</td>
+<td>3</td>
+<td>2</td>
+<td>5</td>
+<td>9</td>
+<td>16</td>
+<td>-7</td>
+<td>11</td>
+</tr>
+
+<tr>
+<td>12</td>
+<td>Equipo 12</td>
+<td>10</td>
+<td>2</td>
+<td>4</td>
+<td>4</td>
+<td>8</td>
+<td>16</td>
+<td>-8</td>
+<td>10</td>
+</tr>
+
+<tr>
+<td>13</td>
+<td>Equipo 13</td>
+<td>10</td>
+<td>2</td>
+<td>2</td>
+<td>6</td>
+<td>7</td>
+<td>18</td>
+<td>-11</td>
+<td>8</td>
+</tr>
+
+<tr>
+<td>14</td>
+<td>Equipo 14</td>
+<td>10</td>
+<td>1</td>
+<td>3</td>
+<td>6</td>
+<td>6</td>
+<td>20</td>
+<td>-14</td>
+<td>6</td>
+</tr>
+
+<tr>
+<td>15</td>
+<td>Equipo 15</td>
+<td>10</td>
+<td>1</td>
+<td>1</td>
+<td>8</td>
+<td>5</td>
+<td>25</td>
+<td>-20</td>
+<td>4</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+<section class="section" id="noticias">
+
+<h2>
+📰 NOTICIAS LPH
+</h2>
+
+<div class="card-grid">
+
+<div class="card news-card">
+<h3>Comenzó la Fecha 12</h3>
+<p>
+Los mejores equipos del torneo vuelven a enfrentarse.
+</p>
+</div>
+
+<div class="card news-card">
+<h3>Nuevo MVP Semanal</h3>
+<p>
+Ya fue seleccionado el mejor jugador de la jornada.
+</p>
+</div>
+
+<div class="card news-card">
+<h3>Récord Histórico</h3>
+<p>
+Un jugador alcanzó una marca nunca antes vista.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<h3>LPH - Liga Profesional Haxball</h3>
+
+<p style="margin-top:10px;">
+© 2026 Todos los derechos reservados.
+</p>
+
+<p style="margin-top:10px;">
+Sitio oficial de la Liga Profesional Haxball.
+</p>
+
+</footer>
+
+<script>
+
+function toggleMenu(){
+document
+.getElementById("sidebar")
+.classList
+.toggle("active");
+}
+
+const brightness =
+document.getElementById("brightness");
+
+brightness.addEventListener("input",()=>{
+
+document.body.style.filter =
+`brightness(${brightness.value}%)`;
+
+localStorage.setItem(
+"lphBrightness",
+brightness.value
+);
+
+});
+
+const fontsize =
+document.getElementById("fontsize");
+
+fontsize.addEventListener("input",()=>{
+
+document.documentElement.style.fontSize =
+fontsize.value + "%";
+
+localStorage.setItem(
+"lphFontSize",
+fontsize.value
+);
+
+});
+
+function setDarkTheme(){
+
+document.documentElement.style.setProperty(
+"--primary",
+"#00b7ff"
+);
+
+document.documentElement.style.setProperty(
+"--secondary",
+"#12005d"
+);
+
+document.documentElement.style.setProperty(
+"--background",
+"#0a0038"
+);
+
+document.documentElement.style.setProperty(
+"--card",
+"#13005f"
+);
+
+document.documentElement.style.setProperty(
+"--text",
+"#ffffff"
+);
+
+document.body.style.background =
+"linear-gradient(135deg,#060025,#10005a,#150072)";
+
+localStorage.setItem(
+"lphTheme",
+"dark"
+);
+
+}
+
+function setLightTheme(){
+
+document.documentElement.style.setProperty(
+"--primary",
+"#0057ff"
+);
+
+document.documentElement.style.setProperty(
+"--secondary",
+"#ffffff"
+);
+
+document.documentElement.style.setProperty(
+"--background",
+"#f2f2f2"
+);
+
+document.documentElement.style.setProperty(
+"--card",
+"#ffffff"
+);
+
+document.documentElement.style.setProperty(
+"--text",
+"#00114d"
+);
+
+document.body.style.background =
+"linear-gradient(135deg,#ffffff,#eef2ff,#dfe8ff)";
+
+document.body.style.color =
+"#00114d";
+
+localStorage.setItem(
+"lphTheme",
+"light"
+);
+
+}
+
+function setInvertTheme(){
+
+document.documentElement.style.setProperty(
+"--primary",
+"#ffffff"
+);
+
+document.documentElement.style.setProperty(
+"--secondary",
+"#00b7ff"
+);
+
+document.documentElement.style.setProperty(
+"--background",
+"#00134d"
+);
+
+document.documentElement.style.setProperty(
+"--card",
+"#003b91"
+);
+
+document.documentElement.style.setProperty(
+"--text",
+"#ffffff"
+);
+
+document.body.style.background =
+"linear-gradient(135deg,#00134d,#003b91,#005fd1)";
+
+localStorage.setItem(
+"lphTheme",
+"invert"
+);
+
+}
+
+function resetTheme(){
+
+localStorage.clear();
+
+location.reload();
+
+}
+
+window.onload = function(){
+
+const savedBrightness =
+localStorage.getItem(
+"lphBrightness"
+);
+
+if(savedBrightness){
+
+brightness.value =
+savedBrightness;
+
+document.body.style.filter =
+`brightness(${savedBrightness}%)`;
+
+}
+
+const savedFont =
+localStorage.getItem(
+"lphFontSize"
+);
+
+if(savedFont){
+
+fontsize.value =
+savedFont;
+
+document.documentElement.style.fontSize =
+savedFont + "%";
+
+}
+
+const savedTheme =
+localStorage.getItem(
+"lphTheme"
+);
+
+if(savedTheme === "dark"){
+setDarkTheme();
+}
+
+if(savedTheme === "light"){
+setLightTheme();
+}
+
+if(savedTheme === "invert"){
+setInvertTheme();
+}
+
+};
+
+</script>
+
+</body>
+</html>
+
