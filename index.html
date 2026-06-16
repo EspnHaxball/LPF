@@ -1010,7 +1010,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
+console.log("Firebase conectado");
 async function loadMVP(){
 
   const snap = await getDoc(
