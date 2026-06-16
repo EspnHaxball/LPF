@@ -263,6 +263,28 @@ margin-bottom:10px;
 opacity:.8;
 }
 
+.tabla-img-container{
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.tabla-img{
+width:min(900px,95%);
+aspect-ratio:1/1;
+object-fit:cover;
+border-radius:20px;
+box-shadow:var(--shadow);
+border:2px solid rgba(255,255,255,.15);
+transition:.3s;
+}
+
+.tabla-img:hover{
+transform:scale(1.01);
+}
+
+
 footer{
 margin-top:50px;
 padding:30px;
@@ -413,19 +435,23 @@ Partido de la Fecha
 
 <h2>
 🏆 MVP DE LA FECHA
-<h3 id="mvpPlayer">
+</h2>
+
+<div class="card-grid">
+
+<div class="card mvp-card">
+
+<div class="mvp-avatar"></div>
+
+<h3>
 Jugador MVP
 </h3>
 
 <div class="mvp-stats">
 
-<p id="mvpGoalsText">
-⚽ Goles: 4
-</p>
+<p>⚽ Goles: 4</p>
 
-<p id="mvpAssistsText">
-🎯 Asistencias: 2
-</p>
+<p>🎯 Asistencias: 2</p>
 
 <p>⭐ Calificación: 9.8</p>
 
@@ -506,225 +532,15 @@ VER EN KICK
 📊 TABLA DE POSICIONES
 </h2>
 
-<table>
+<div class="tabla-img-container">
 
-<thead>
+<img
+src="tabla.png"
+alt="Tabla de Posiciones LPH"
+class="tabla-img"
+>
 
-<tr>
-<th>POS</th>
-<th>EQUIPO</th>
-<th>PJ</th>
-<th>PG</th>
-<th>PE</th>
-<th>PP</th>
-<th>GF</th>
-<th>GC</th>
-<th>DG</th>
-<th>PTS</th>
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-<td>1</td>
-<td>Equipo 1</td>
-<td>10</td>
-<td>8</td>
-<td>1</td>
-<td>1</td>
-<td>25</td>
-<td>8</td>
-<td>17</td>
-<td>25</td>
-</tr>
-
-<tr>
-<td>2</td>
-<td>Equipo 2</td>
-<td>10</td>
-<td>7</td>
-<td>2</td>
-<td>1</td>
-<td>22</td>
-<td>10</td>
-<td>12</td>
-<td>23</td>
-</tr>
-
-<tr>
-<td>3</td>
-<td>Equipo 3</td>
-<td>10</td>
-<td>6</td>
-<td>2</td>
-<td>2</td>
-<td>18</td>
-<td>9</td>
-<td>9</td>
-<td>20</td>
-</tr>
-
-<tr>
-<td>4</td>
-<td>Equipo 4</td>
-<td>10</td>
-<td>6</td>
-<td>1</td>
-<td>3</td>
-<td>17</td>
-<td>11</td>
-<td>6</td>
-<td>19</td>
-</tr>
-
-<tr>
-<td>5</td>
-<td>Equipo 5</td>
-<td>10</td>
-<td>5</td>
-<td>3</td>
-<td>2</td>
-<td>15</td>
-<td>12</td>
-<td>3</td>
-<td>18</td>
-</tr>
-
-<tr>
-<td>6</td>
-<td>Equipo 6</td>
-<td>10</td>
-<td>5</td>
-<td>2</td>
-<td>3</td>
-<td>14</td>
-<td>12</td>
-<td>2</td>
-<td>17</td>
-</tr>
-
-<tr>
-<td>7</td>
-<td>Equipo 7</td>
-<td>10</td>
-<td>4</td>
-<td>3</td>
-<td>3</td>
-<td>13</td>
-<td>13</td>
-<td>0</td>
-<td>15</td>
-</tr>
-
-<tr>
-<td>8</td>
-<td>Equipo 8</td>
-<td>10</td>
-<td>4</td>
-<td>2</td>
-<td>4</td>
-<td>12</td>
-<td>14</td>
-<td>-2</td>
-<td>14</td>
-</tr>
-
-<tr>
-<td>9</td>
-<td>Equipo 9</td>
-<td>10</td>
-<td>4</td>
-<td>1</td>
-<td>5</td>
-<td>11</td>
-<td>15</td>
-<td>-4</td>
-<td>13</td>
-</tr>
-
-<tr>
-<td>10</td>
-<td>Equipo 10</td>
-<td>10</td>
-<td>3</td>
-<td>3</td>
-<td>4</td>
-<td>10</td>
-<td>15</td>
-<td>-5</td>
-<td>12</td>
-</tr>
-
-<tr>
-<td>11</td>
-<td>Equipo 11</td>
-<td>10</td>
-<td>3</td>
-<td>2</td>
-<td>5</td>
-<td>9</td>
-<td>16</td>
-<td>-7</td>
-<td>11</td>
-</tr>
-
-<tr>
-<td>12</td>
-<td>Equipo 12</td>
-<td>10</td>
-<td>2</td>
-<td>4</td>
-<td>4</td>
-<td>8</td>
-<td>16</td>
-<td>-8</td>
-<td>10</td>
-</tr>
-
-<tr>
-<td>13</td>
-<td>Equipo 13</td>
-<td>10</td>
-<td>2</td>
-<td>2</td>
-<td>6</td>
-<td>7</td>
-<td>18</td>
-<td>-11</td>
-<td>8</td>
-</tr>
-
-<tr>
-<td>14</td>
-<td>Equipo 14</td>
-<td>10</td>
-<td>1</td>
-<td>3</td>
-<td>6</td>
-<td>6</td>
-<td>20</td>
-<td>-14</td>
-<td>6</td>
-</tr>
-
-<tr>
-<td>15</td>
-<td>Equipo 15</td>
-<td>10</td>
-<td>1</td>
-<td>1</td>
-<td>8</td>
-<td>5</td>
-<td>25</td>
-<td>-20</td>
-<td>4</td>
-</tr>
-
-</tbody>
-
-</table>
+</div>
 
 </section>
 
@@ -989,56 +805,6 @@ setInvertTheme();
 
 </script>
 
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-
-import {
-getFirestore,
-doc,
-getDoc
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCpDw6hgmZusSN-rxCvyV7Zq4-02eY-_mw",
-  authDomain: "lph26-cf606.firebaseapp.com",
-  projectId: "lph26-cf606",
-  storageBucket: "lph26-cf606.firebasestorage.app",
-  messagingSenderId: "770289045254",
-  appId: "1:770289045254:web:0d54d2d9de6a7cbfd3d887"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-console.log("Firebase conectado");
-async function loadMVP(){
-
-  const snap = await getDoc(
-    doc(db,"mvp","current")
-  );
-
-  if(!snap.exists()){
-    console.log("No existe el documento MVP");
-    return;
-  }
-
-  const data = snap.data();
-
-  document.getElementById("mvpPlayer").innerText =
-  data.name;
-
-  document.getElementById("mvpGoalsText").innerText =
-  "⚽ Goles: " + data.goals;
-
-  document.getElementById("mvpAssistsText").innerText =
-  "🎯 Asistencias: " + data.assists;
-
-}
-
-loadMVP();
-
-</script>
-  
 </body>
 </html>
 
